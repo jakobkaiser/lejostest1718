@@ -57,17 +57,39 @@ public class Kaiserfant2 {
 		lcd.drawString(colorId + " - " + colorName, 0, 0);
 	////	keys.waitForAnyPress();
 		
-		motorA.setSpeed(300);
-		motorA.backward();
-
-		motorD.setSpeed(300);
-		motorD.backward();
-
-		Delay.msDelay(3000);
+//		motorA.setSpeed(300);
+//		motorA.backward();
+//
+//		motorD.setSpeed(300);
+//		motorD.backward();
+//
+//		Delay.msDelay(3000);
 		
-	if (lcd == 0 );
-
+//		while(colorSensor.getColorID() != Color.BLACK){
+//            System.out.println("waiting for black");
+//    }
 		
+		while(true) {
+			if(colorSensor.getColorID() != Color.RED) {
+				motorA.setSpeed(300);
+				motorA.backward();
+				
+				motorD.setSpeed(300);
+				motorD.backward();
+				
+				Delay.msDelay(10000);
+			}
+			
+			else {
+				motorA.setSpeed(1000);
+				motorA.backward();
+				
+				motorD.setSpeed(1000);
+				motorD.backward();
+				
+				Delay.msDelay(30000);
+			}
+		}
 //		
 //		motorA.setSpeed(0);
 //		motorA.backward();
@@ -85,15 +107,10 @@ public class Kaiserfant2 {
 //		 
 //		Delay.msDelay(30000);
 
-		motorD.stop();
+		
 
 		// ...
 
-		motorA.stop();
-
-		motorA.close();
-
-		motorD.close();
 
 	}
 }
