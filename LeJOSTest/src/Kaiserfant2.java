@@ -77,17 +77,26 @@ public class Kaiserfant2 {
 				motorD.setSpeed(300);
 				motorD.backward();
 				
-				Delay.msDelay(10000);
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					
+				}
 			}
 			
 			else {
-				motorA.setSpeed(1000);
+				motorA.setSpeed(500);
 				motorA.backward();
 				
-				motorD.setSpeed(1000);
+				motorD.setSpeed(500);
 				motorD.backward();
 				
-				Delay.msDelay(30000);
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					
+				}
+
 			}
 		}
 //		
