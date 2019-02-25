@@ -8,7 +8,6 @@ import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.SensorMode;
 import lejos.robotics.Color;
 import lejos.robotics.RegulatedMotor;
-import lejos.utility.Delay;
 
 public class Kaiserfant2 {
 
@@ -16,12 +15,10 @@ public class Kaiserfant2 {
 
 		RegulatedMotor motorA = new EV3MediumRegulatedMotor(MotorPort.A);
 		RegulatedMotor motorD = new EV3MediumRegulatedMotor(MotorPort.D);
-		
-					
+
 		EV3 ev3 = (EV3) BrickFinder.getLocal();
 		TextLCD lcd = ev3.getTextLCD();
-	////	Keys keys = ev3.getKeys();
-
+//colorsensor bestimmen
 		EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S3);
 		SensorMode color = colorSensor.getColorIDMode();
 		float[] sample = new float[color.sampleSize()];
@@ -54,72 +51,43 @@ public class Kaiserfant2 {
 			colorName = "BROWN";
 			break;
 		}
+		//Output der erkannten Farbe
 		lcd.drawString(colorId + " - " + colorName, 0, 0);
-	////	keys.waitForAnyPress();
+
+		//während kein rot oder weiß erkannt wird -> geht normal
+		//während rot sieht -> geht schneller
+		//wenn weiß sieht -> Programm wird beendet
 		
-//		motorA.setSpeed(300);
-//		motorA.backward();
-//
-//		motorD.setSpeed(300);
-//		motorD.backward();
-//
-//		Delay.msDelay(3000);
-		
-//		while(colorSensor.getColorID() != Color.BLACK){
-//            System.out.println("waiting for black");
-//    }
-		
-		while(true) {
-			if(colorSensor.getColorID() != Color.RED) {
+		while (colorSensor.getColorID() != Color.WHITE) {
+			if (colorSensor.getColorID() != Color.RED) {
 				motorA.setSpeed(300);
 				motorA.backward();
-				
+
 				motorD.setSpeed(300);
 				motorD.backward();
-				
+
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
-					
+
 				}
 			}
-			
+
 			else {
-				motorA.setSpeed(500);
+				motorA.setSpeed(600);
 				motorA.backward();
-				
-				motorD.setSpeed(500);
+
+				motorD.setSpeed(600);
 				motorD.backward();
-				
+
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e) {
-					
+
 				}
 
 			}
 		}
-//		
-//		motorA.setSpeed(0);
-//		motorA.backward();
-//		
-//		motorD.setSpeed(0);
-//		motorD.backward();
-//		 
-//		Delay.msDelay(1000);
-
-//		motorA.setSpeed(550);
-//		motorA.forward();
-//		
-//		motorD.setSpeed(550);
-//		motorD.backward();
-//		 
-//		Delay.msDelay(30000);
-
-		
-
-		// ...
-
 
 	}
 }
