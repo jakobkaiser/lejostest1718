@@ -12,7 +12,7 @@ import lejos.robotics.RegulatedMotor;
 public class Kaiserfant2 {
 
 	public static void main(String[] args) {
-
+//Definierung der Motoren
 		RegulatedMotor motorA = new EV3MediumRegulatedMotor(MotorPort.A);
 		RegulatedMotor motorD = new EV3MediumRegulatedMotor(MotorPort.D);
 
@@ -21,6 +21,7 @@ public class Kaiserfant2 {
 //colorsensor bestimmen
 		EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S3);
 		SensorMode color = colorSensor.getColorIDMode();
+		// Farbe erkennen und in Variable einsetzen
 		float[] sample = new float[color.sampleSize()];
 		color.fetchSample(sample, 0);
 		int colorId = (int) sample[0];
@@ -51,13 +52,13 @@ public class Kaiserfant2 {
 			colorName = "BROWN";
 			break;
 		}
-		//Output der erkannten Farbe
+		// Output der erkannten Farbe
 		lcd.drawString(colorId + " - " + colorName, 0, 0);
 
-		//während kein rot oder weiß erkannt wird -> geht normal
-		//während rot sieht -> geht schneller
-		//wenn weiß sieht -> Programm wird beendet
-		
+//während kein rot oder weiß erkannt wird -> geht normal
+//während rot sieht -> geht schneller
+//wenn weiß sieht -> Programm wird beendet
+
 		while (colorSensor.getColorID() != Color.WHITE) {
 			if (colorSensor.getColorID() != Color.RED) {
 				motorA.setSpeed(300);
