@@ -79,7 +79,7 @@ public class Kaiserfant2 {
 				motorA.backward();
 
 				motorD.setSpeed(600);
-				motorD.backward();
+				motorD.backward(); 
 
 				try {
 					Thread.sleep(3000);
